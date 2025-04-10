@@ -10,7 +10,7 @@ public class AddComplaintCommandFactoryTest {
     void shouldCorrectlyCreateCommand() {
         ComplaintRequestDto dto = new ComplaintRequestDto("ABC-202022", "Test", "Jan Kowalski");
 
-        AddComplaintCommand result = AddComplaintCommandFactory.fromRequest(dto);
+        AddComplaintCommand result = AddComplaintCommandFactory.fromRequest(dto, "77.1.2.4");
 
         assertEquals(result.productId(), dto.productId());
         assertEquals(result.declarant(), dto.declarant());

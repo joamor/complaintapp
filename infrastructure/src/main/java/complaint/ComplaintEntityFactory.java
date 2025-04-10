@@ -9,6 +9,7 @@ public class ComplaintEntityFactory {
               complaint.productId(),
               complaint.declarant(),
               complaint.description(),
+              complaint.country(),
               complaint.counter());
     }
 

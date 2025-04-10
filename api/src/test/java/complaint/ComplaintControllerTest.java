@@ -21,7 +21,7 @@ public class ComplaintControllerTest {
     void shouldReturnNullWhileAddingComplaint() {
         ComplaintRequestDto body = new ComplaintRequestDto("20250403", "Test", "Jan Kowalski");
 
-        ResponseEntity<ComplaintResponseDto> response = classUnderTests.addComplaint(body);
+        ResponseEntity<ComplaintResponseDto> response = classUnderTests.addComplaint(null, body);
 
         assertNull(response);
     }

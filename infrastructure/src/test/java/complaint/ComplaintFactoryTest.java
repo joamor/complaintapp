@@ -17,6 +17,7 @@ public class ComplaintFactoryTest {
                 "XYZ20251234",
                 "Jan Kowalski",
                 "Test",
+                "PL",
                 3);
 
         Complaint result = ComplaintFactory.create(complaintEntity);
@@ -26,6 +27,7 @@ public class ComplaintFactoryTest {
         assertEquals(complaintEntity.getProductId(), result.productId());
         assertEquals(complaintEntity.getDeclarant(), result.declarant());
         assertEquals(complaintEntity.getDescription(), result.description());
+        assertEquals(complaintEntity.getCountry(), result.country());
         assertEquals(complaintEntity.getCounter(), result.counter());
     }
 

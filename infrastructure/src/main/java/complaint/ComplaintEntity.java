@@ -32,6 +32,9 @@ public class ComplaintEntity implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "country", nullable = false)
+    private String country;
+
     @Column(name = "counter", nullable = false)
     private Integer counter;
 
@@ -42,12 +45,14 @@ public class ComplaintEntity implements Serializable {
                             String productId,
                             String declarant,
                             String description,
+                            String country,
                             Integer counter) {
         this.id = complaintId;
         this.creationDate = creationDate;
         this.productId = productId;
         this.declarant = declarant;
         this.description = description;
+        this.country = country;
         this.counter = counter;
     }
 
@@ -56,8 +61,9 @@ public class ComplaintEntity implements Serializable {
                                                     String productId,
                                                     String declarant,
                                                     String description,
+                                                    String country,
                                                     Integer counter) {
-        return new ComplaintEntity(complaintId, creationDate, productId, declarant, description, counter);
+        return new ComplaintEntity(complaintId, creationDate, productId, declarant, description, country, counter);
     }
 
     public UUID getId() {
@@ -78,6 +84,10 @@ public class ComplaintEntity implements Serializable {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getCountry() {
+        return country;
     }
 
     public Integer getCounter() {

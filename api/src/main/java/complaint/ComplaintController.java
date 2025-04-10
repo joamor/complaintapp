@@ -1,5 +1,6 @@
 package complaint;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,10 @@ public class ComplaintController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<ComplaintResponseDto> addComplaint(@RequestBody ComplaintRequestDto complaintRequestDto) {
-        AddComplaintCommand command = AddComplaintCommandFactory.fromRequest(complaintRequestDto);
+    public ResponseEntity<ComplaintResponseDto> addComplaint(HttpServletRequest httpServletRequest,
+                                                             @RequestBody ComplaintRequestDto complaintRequestDto) {
+        String ip = getIpFromRequest(httpServletRequest);
+        AddComplaintCommand command = AddComplaintCommandFactory.fromRequest(complaintRequestDto, ip);
         Complaint complaint = complaintService.addOrBumpUpComplaint(command);
         ComplaintResponseDto response = ComplaintResponseDto.of(complaint);
         return ResponseEntity.ofNullable(response);
@@ -49,6 +52,10 @@ public class ComplaintController {
                 .map(ComplaintResponseDto::of)
                 .toList();
         return ResponseEntity.ofNullable(response);
+    }
+
+    private String getIpFromRequest(HttpServletRequest httpServletRequest) {
+        return httpServletRequest.getRemoteAddr();
     }
 
 }

@@ -1,5 +1,6 @@
 package complaint;
 
+import location.LocationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,9 +9,12 @@ import java.util.List;
 public class ComplaintServiceImpl implements ComplaintService {
 
     private final ComplaintRepository complaintRepository;
+    private final LocationRepository locationRepository;
 
-    public ComplaintServiceImpl(ComplaintRepository complaintRepository) {
+    public ComplaintServiceImpl(ComplaintRepository complaintRepository,
+                                LocationRepository locationRepository) {
         this.complaintRepository = complaintRepository;
+        this.locationRepository = locationRepository;
     }
 
     @Override
@@ -33,7 +37,8 @@ public class ComplaintServiceImpl implements ComplaintService {
     }
 
     private Complaint addComplaint(AddComplaintCommand command) {
-        Complaint complaint = Complaint.createInstance(command);
+        String country = locationRepository.getCountryByIp(null);
+        Complaint complaint = Complaint.createInstance(command, country);
         return complaintRepository.save(complaint);
     }
 

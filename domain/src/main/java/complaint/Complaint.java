@@ -9,6 +9,7 @@ public record Complaint(UUID complaintId,
                         String productId,
                         String declarant,
                         String description,
+                        String country,
                         LocalDateTime creationDate,
                         Integer counter) {
 
@@ -16,6 +17,7 @@ public record Complaint(UUID complaintId,
         requireNonNull(productId, "productId must not be null");
         requireNonNull(description, "description must not be null");
         requireNonNull(declarant, "declarant must not be null");
+        requireNonNull(country, "country must not be null");
 
         if (complaintId == null) {
             complaintId = UUID.randomUUID();
@@ -34,11 +36,12 @@ public record Complaint(UUID complaintId,
         }
     }
 
-    public static Complaint createInstance(AddComplaintCommand command) {
+    public static Complaint createInstance(AddComplaintCommand command, String country) {
         return new Complaint(UUID.randomUUID(),
                 command.productId(),
                 command.declarant(),
                 command.description(),
+                country,
                 LocalDateTime.now(),
                 1);
     }
@@ -48,6 +51,7 @@ public record Complaint(UUID complaintId,
                 complaint.productId(),
                 complaint.declarant(),
                 description,
+                complaint.country(),
                 complaint.creationDate(),
                 complaint.counter());
     }
@@ -58,6 +62,7 @@ public record Complaint(UUID complaintId,
                 complaint.productId(),
                 complaint.declarant(),
                 complaint.description(),
+                complaint.country(),
                 complaint.creationDate(),
                 counter);
     }
@@ -66,9 +71,10 @@ public record Complaint(UUID complaintId,
                                          String productId,
                                          String declarant,
                                          String description,
+                                         String country,
                                          LocalDateTime creationDate,
                                          Integer counter) {
-        return new Complaint(complaintUuid, productId, declarant, description, creationDate, counter);
+        return new Complaint(complaintUuid, productId, declarant, description, country, creationDate, counter);
     }
 
 }

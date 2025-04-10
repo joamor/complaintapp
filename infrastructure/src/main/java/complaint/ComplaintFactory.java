@@ -8,6 +8,7 @@ public class ComplaintFactory {
                 complaint.getProductId(),
                 complaint.getDeclarant(),
                 complaint.getDescription(),
+                complaint.getCountry(),
                 complaint.getCreationDate(),
                 complaint.getCounter());
     }
