@@ -1,16 +1,21 @@
 package complaint;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ComplaintControllerTest {
 
-    private final ComplaintController classUnderTests = new ComplaintController();
+    private final ComplaintService complaintService = Mockito.mock(ComplaintService.class);
+
+    private final ComplaintController classUnderTests = new ComplaintController(complaintService);
 
     @Test
     void shouldReturnNullWhileAddingComplaint() {
@@ -24,9 +29,8 @@ public class ComplaintControllerTest {
     @Test
     void shouldReturnNullWhileUpdatingComplaint() {
         UUID complaintId = UUID.randomUUID();
-        ComplaintRequestDto body = new ComplaintRequestDto("20250403", "Test", "Adam Kowalski");
 
-        ResponseEntity<ComplaintResponseDto> response = classUnderTests.editComplaint(complaintId, body);
+        ResponseEntity<ComplaintResponseDto> response = classUnderTests.editComplaint(complaintId, "Test XYZ");
 
         assertNull(response);
     }

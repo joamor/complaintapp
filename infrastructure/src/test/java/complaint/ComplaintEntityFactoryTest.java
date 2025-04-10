@@ -8,7 +8,8 @@ public class ComplaintEntityFactoryTest {
 
     @Test
     void shouldCorrectlyCreateEntityObject() {
-        Complaint complaint = Complaint.createInstance("AD202504", "Jan Kowalski", "Test");
+        AddComplaintCommand command = AddComplaintCommand.of("XYZ-20250413", "Jan Kowalski", "Test");
+        Complaint complaint = Complaint.createInstance(command);
 
         ComplaintEntity result = ComplaintEntityFactory.create(complaint);
 

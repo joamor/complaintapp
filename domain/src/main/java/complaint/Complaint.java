@@ -34,8 +34,13 @@ public record Complaint(UUID complaintId,
         }
     }
 
-    public static Complaint createInstance(String productId, String declarant, String description) {
-        return new Complaint(UUID.randomUUID(), productId, declarant, description, LocalDateTime.now(), 1);
+    public static Complaint createInstance(AddComplaintCommand command) {
+        return new Complaint(UUID.randomUUID(),
+                command.productId(),
+                command.declarant(),
+                command.description(),
+                LocalDateTime.now(),
+                1);
     }
 
     public static Complaint updateDescription(Complaint complaint, String description) {

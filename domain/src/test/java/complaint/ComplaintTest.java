@@ -9,7 +9,8 @@ public class ComplaintTest {
 
     @Test
     void testNewInstanceCreation() {
-        Complaint result = Complaint.createInstance("XYZ-20250413", "Jan Kowalski", "Test");
+        AddComplaintCommand command = AddComplaintCommand.of("XYZ-20250413", "Jan Kowalski", "Test");
+        Complaint result = Complaint.createInstance(command);
 
         assertNotNull(result.complaintId());
         assertEquals("XYZ-20250413", result.productId());
@@ -21,7 +22,8 @@ public class ComplaintTest {
 
     @Test
     void testDescriptionUpdate() {
-        Complaint complaint = Complaint.createInstance("XYZ-20250413", "Jan Kowalski", "Test");
+        AddComplaintCommand command = AddComplaintCommand.of("XYZ-20250413", "Jan Kowalski", "Test");
+        Complaint complaint = Complaint.createInstance(command);
 
         Complaint result = Complaint.updateDescription(complaint, "TestXYZ ");
 
@@ -35,7 +37,8 @@ public class ComplaintTest {
 
     @Test
     void testCounterBumpUp() {
-        Complaint complaint = Complaint.createInstance("XYZ-20250413", "Jan Kowalski", "Test");
+        AddComplaintCommand command = AddComplaintCommand.of("XYZ-20250413", "Jan Kowalski", "Test");
+        Complaint complaint = Complaint.createInstance(command);
 
         Complaint result = Complaint.bumpUpCounter(complaint);
 
@@ -49,7 +52,8 @@ public class ComplaintTest {
 
     @Test
     void testInstanceCreationFromExistingOne() {
-        Complaint complaint = Complaint.createInstance("XYZ-20250413", "Jan Kowalski", "Test");
+        AddComplaintCommand command = AddComplaintCommand.of("XYZ-20250413", "Jan Kowalski", "Test");
+        Complaint complaint = Complaint.createInstance(command);
 
         Complaint result = Complaint.fromExisting(
                 complaint.complaintId(),
